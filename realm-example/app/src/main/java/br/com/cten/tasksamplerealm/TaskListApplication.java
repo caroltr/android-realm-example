@@ -17,8 +17,11 @@ public class TaskListApplication extends Application {
         Realm.init(this);
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .name("tasky.realm")
-                .schemaVersion(0)
+                .schemaVersion(1)
+                .migration(new Migration())
+                // .deleteRealmIfMigrationNeeded() // delete data when there are any changes on schema
                 .build();
+        // Realm.deleteRealm(realmConfig); // To remove data, while in development
         Realm.setDefaultConfiguration(realmConfig);
     }
 }

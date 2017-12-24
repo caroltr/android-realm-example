@@ -30,6 +30,7 @@ public class TaskListActivity extends AppCompatActivity {
         // on a background thread. The RealmBaseAdapter will automatically keep track of changes and will
         // automatically refresh when a change is detected.
         RealmResults<Task> tasks = getTasks();
+        tasks = tasks.sort("timestamp");
         final TaskAdapter adapter = new TaskAdapter(this, tasks);
 
         ListView listView = findViewById(R.id.task_list);
@@ -71,8 +72,9 @@ public class TaskListActivity extends AppCompatActivity {
 
     private void createTask(String taskName) {
         realm.executeTransactionAsync(r -> {
-                r.createObject(Task.class, UUID.randomUUID().toString())
-                        .setName(taskName);
+            Task task = r.createObject(Task.class, UUID.randomUUID().toString());
+            task.setName(taskName);
+            task.setTimestamp(System.currentTimeMillis());
         });
     }
 

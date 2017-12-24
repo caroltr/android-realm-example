@@ -18,6 +18,7 @@ public class Task extends RealmObject {
     private String name;
 
     private boolean done;
+    private long timestamp;
 
     public String getId() {
         return id;
@@ -41,5 +42,13 @@ public class Task extends RealmObject {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
