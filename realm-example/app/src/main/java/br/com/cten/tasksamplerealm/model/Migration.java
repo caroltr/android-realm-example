@@ -1,4 +1,4 @@
-package br.com.cten.tasksamplerealm;
+package br.com.cten.tasksamplerealm.model;
 
 import io.realm.DynamicRealm;
 import io.realm.DynamicRealmObject;

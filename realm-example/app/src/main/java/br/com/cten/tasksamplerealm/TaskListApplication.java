@@ -2,6 +2,7 @@ package br.com.cten.tasksamplerealm;
 
 import android.app.Application;
 
+import br.com.cten.tasksamplerealm.model.Migration;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
