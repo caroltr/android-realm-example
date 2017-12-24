@@ -1,10 +1,13 @@
 package br.com.cten.tasksamplerealm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -12,6 +15,7 @@ import android.widget.ListView;
 import java.util.UUID;
 
 import br.com.cten.tasksamplerealm.realm.Task;
+import br.com.cten.tasksamplerealm.utils.CredentialsManager;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -112,10 +116,23 @@ public class TaskListActivity extends AppCompatActivity {
         });
     }
 
+    private void logout() {
+        CredentialsManager.deleteCredentials(TaskListActivity.this);
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         realm.close();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_task_list, menu);
+        return true;
+
     }
 
     @Override
@@ -126,6 +143,8 @@ public class TaskListActivity extends AppCompatActivity {
         if (id == R.id.action_delete) {
             deleteAllDone();
             return true;
+        } else if (id == R.id.logout) {
+            logout();
         }
 
         return super.onOptionsItemSelected(item);
